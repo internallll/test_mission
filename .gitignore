@@ -11,3 +11,4 @@ app.db
 logs/
 .idea/
 media
+db.sqlite3

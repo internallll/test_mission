@@ -27,3 +27,7 @@
 ```bash
   python manage.py migrate
 ```
+### 4. Линтер
+```bash
+  ruff format && ruff check --fix
+```
