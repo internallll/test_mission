@@ -18,16 +18,25 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        "django_file": {
+        "main_file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "formatter": "verbose",
             "filename": LOGS_DIR / "main.log",
         },
+        "webserver": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "formatter": "verbose",
+            "filename": LOGS_DIR / "webserver.log",
+        },
     },
     "loggers": {
         "django": {
-            "handlers": ["console", "django_file"],
+            "handlers": ["webserver"],
+        },
+        "webserver": {
+            "handlers": ["main_file"],
         },
     },
 }
