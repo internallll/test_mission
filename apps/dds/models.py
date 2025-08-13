@@ -40,7 +40,10 @@ class Subcategory(models.Model):
     """
 
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, verbose_name="Категория"
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name="subcategories",
     )
     name = models.CharField("Название подкатегории", max_length=100)
 

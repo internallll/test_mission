@@ -33,7 +33,7 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["webserver"],
+            "handlers": ["console", "webserver"],
         },
         "webserver": {
             "handlers": ["main_file"],

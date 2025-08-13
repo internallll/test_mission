@@ -27,6 +27,11 @@
 ```bash
   python manage.py migrate
 ```
+### 4. Фикстуры
+Для нормального работы приложения следует добавить первоначальные данные
+```bash
+  python manage.py loaddata db.json
+```
 ### 4. Линтер
 ```bash
   ruff format && ruff check --fix

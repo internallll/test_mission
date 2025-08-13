@@ -3,15 +3,9 @@ from rest_framework import serializers
 from apps.dds import models
 
 
-class Transaction(serializers.ModelSerializer):
+class Type(serializers.ModelSerializer):
     class Meta:
-        model = models.Transaction
-        fields = "__all__"
-
-
-class Category(serializers.ModelSerializer):
-    class Meta:
-        model = models.Category
+        model = models.Type
         fields = "__all__"
 
 
@@ -21,7 +15,23 @@ class SubCategory(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class Type(serializers.ModelSerializer):
+class Category(serializers.ModelSerializer):
+    subcategories = SubCategory(many=True, read_only=True)
+
     class Meta:
-        model = models.Type
+        model = models.Category
         fields = "__all__"
+
+
+class Transaction(serializers.ModelSerializer):
+    class Meta:
+        model = models.Transaction
+        fields = "__all__"
+
+    def validate(self, data):
+        if data["category"].type != data["type"]:
+            raise serializers.ValidationError(
+                "Выбранная категория не принадлежит выбранному типу операции"
+            )
+
+        return data
