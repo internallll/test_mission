@@ -9,5 +9,5 @@ htmlcov
 .env
 app.db
 logs/
-.idea
+.idea/
 media
