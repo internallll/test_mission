@@ -12,7 +12,7 @@ POSTGRES_HOST = env("POSTGRES_HOST", default="localhost")
 POSTGRES_PORT = env.int("POSTGRES_PORT", default=5432)
 
 
-if DEBUG:
+if not DEBUG:
     try:
         import psycopg2
 
