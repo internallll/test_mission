@@ -1,4 +1,3 @@
-
 from main.config.base import BASE_DIR
 
 LOGS_DIR = BASE_DIR / "logs"
