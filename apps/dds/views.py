@@ -9,6 +9,9 @@ logger = logging.getLogger("webserver")
 
 @extend_schema(tags=["Transaction"])
 class Transaction(viewsets.ModelViewSet):
+    """
+    Ручки для работы с Транзакциями
+    """
     try:
         queryset = models.Transaction.objects.all()
         serializer_class = serializers.Transaction
@@ -18,6 +21,7 @@ class Transaction(viewsets.ModelViewSet):
 
 @extend_schema(tags=["Type"])
 class Type(viewsets.ModelViewSet):
+    """Ручки для работы с Типами"""
     try:
         queryset = models.Type.objects.all()
         serializer_class = serializers.Type
@@ -27,6 +31,7 @@ class Type(viewsets.ModelViewSet):
 
 @extend_schema(tags=["Category"])
 class Category(viewsets.ModelViewSet):
+    """Ручки для работы с Категориями"""
     try:
         queryset = models.Category.objects.all()
         serializer_class = serializers.Category
@@ -36,6 +41,7 @@ class Category(viewsets.ModelViewSet):
 
 @extend_schema(tags=["Subcategory"])
 class Subcategory(viewsets.ModelViewSet):
+    """Ручки для работы с Подкатегориями"""
     try:
         queryset = models.Subcategory.objects.all()
         serializer_class = serializers.SubCategory
