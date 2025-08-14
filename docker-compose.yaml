@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   test:
     build:
@@ -5,27 +7,24 @@ services:
       dockerfile: Dockerfile
     container_name: test
     ports:
-      - "8081:81"
+      - "8082:8000"  # Исправлено с 80 на 8000 (стандартный порт Django)
     env_file:
       - .env
     environment:
-      - DEBUG=False
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_PORT=${POSTGRES_PORT}
+      - DEBUG=${DEBUG}
+      - POSTGRES_HOST=test_db_pg  # Используем имя сервиса
+      - POSTGRES_PORT=5432        # Внутренний порт контейнера PostgreSQL
     volumes:
-      - ./media:/media
-      - ./logs:/logs
+      - ./media:/app/media
+      - ./logs:/app/logs
+      - .env:/app/.env
+
     depends_on:
       test_db_pg:
         condition: service_healthy
     networks:
-      - backend
-    restart: always
-
-
+      - network
+    restart: always # Лучше чем always
 
   test_db_pg:
     image: postgres:17
@@ -36,15 +35,13 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_PORT=${POSTGRES_PORT}
     ports:
-      - "${POSTGRES_HOST_PORT}:${POSTGRES_PORT}"
+      - "5434:5432"  # Хост:5434 → Контейнер:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - backend
-    restart: always
+      - network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -52,10 +49,9 @@ services:
       retries: 5
       start_period: 10s
 
-
 volumes:
   pgdata:
+
 networks:
-  backend:
-    name: backend
+  network:
     driver: bridge

@@ -36,3 +36,105 @@
 ```bash
   ruff format && ruff check --fix
 ```
+### 5. Создание суперпользователя
+```bash
+    python manage.py createsuperuser
+```
+
+## Запуск проекта через Makefile
+
+Проект можно запускать с помощью команд из `Makefile`. Вот описание основных команд:
+
+### Быстрый старт
+- **Запуск всех сервисов в контейнере (Django, RabbitMQ, Celery, PostgreSQL)**
+```bash
+  sudo make start
+```
+- **Остановка контейнеров**
+```bash
+  sudo make stop
+```
+
+---
+
+<details>
+<summary>Полный список команд</summary>
+
+### 1. Запуск сервисов
+- **Запуск всех сервисов (Django, RabbitMQ, Celery, PostgreSQL):**
+```bash
+  sudo make start
+```
+- **Запуск всех сервисов с динамическим редактирование:**
+```bash
+  sudo make watch
+```
+
+### 2. Остановка сервисов
+- **Остановка контейнеров:**
+```bash
+  sudo make stop
+```
+- **Остановка контейнеров с их удалением:**
+```bash
+  sudo make down
+```
+- **Остановка контейнеров с удалением volumes (полная очистка):**
+```bash
+  sudo make down-total## Запуск проекта через Makefile
+
+Проект можно запускать с помощью команд из `Makefile`. Вот описание основных команд:
+
+### Быстрый старт
+- **Запуск всех сервисов в контейнере (Django, RabbitMQ, Celery, PostgreSQL)**
+```bash
+  sudo make start
+```
+- **Остановка контейнеров**
+```bash
+  sudo make stop
+```
+
+---
+
+<details>
+<summary>Полный список команд</summary>
+
+### 1. Запуск сервисов
+- **Запуск всех сервисов (Django, RabbitMQ, Celery, PostgreSQL):**
+```bash
+  sudo make start
+```
+- **Запуск всех сервисов с динамическим редактирование:**
+```bash
+  sudo make watch
+```
+
+### 2. Остановка сервисов
+- **Остановка контейнеров:**
+```bash
+  sudo make stop
+```
+- **Остановка контейнеров с их удалением:**
+```bash
+  sudo make down
+```
+```
+
+### 3. Просмотр логов
+- **Логи Django приложения:**
+```bash
+  sudo make webserver-logs
+```
+- **Логи RabbitMQ приложения:**
+```bash
+  sudo make rabbitmq-logs
+```
+- **Логи PostgreSQL приложения:**
+```bash
+  sudo make postgres-logs
+```
+</details>
+
+---
+

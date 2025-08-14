@@ -1,0 +1,13 @@
+services:
+  test:
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./apps
+          target: /app/apps
+        - action: sync+restart
+          path: ./config
+          target: /app/main
+        - action: sync+restart
+          path: ./manage.py
+          target: /opt/app/manage.py
